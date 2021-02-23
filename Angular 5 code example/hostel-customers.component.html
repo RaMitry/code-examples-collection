@@ -1,0 +1,150 @@
+<div class="hostel-customers-wrapper container-fluid">
+    
+    <div class="block-header padding-bottom-0">
+        <h2>{{l("HostelCustomers")}}</h2>
+    </div>
+    
+    <div class="row clearfix">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="info-box">
+                <div class="icon bg-teal">
+                    <i class="material-icons">add</i>
+                </div>
+                <div class="content">
+                    <div class="text"><a class="add-hostel-customer-link text-uppercase" href="#">{{l("NewHostelCustomer")}}</a></div>
+                    <div class="number">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="info-box">
+                <div class="icon bg-red">
+                    <i class="material-icons">directions_car</i>
+                </div>
+                <div class="content">
+                    <div class="text info-text text-uppercase">{{l("Vehicles")}}</div>
+                    <div class="number">41</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="info-box">
+                <div class="icon bg-orange">
+                    <i class="material-icons">radio_button_checked</i>
+                </div>
+                <div class="content">
+                    <div class="text info-text text-uppercase">{{l("Wheelsets")}}</div>
+                    <div class="number">245</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="info-box">
+                <div class="icon bg-grey">
+                    <i class="material-icons">forward</i>
+                </div>
+                <div class="content">
+                    <div class="text info-text text-uppercase">{{l("Transactions")}}</div>
+                    <div class="number">44</div>
+                </div>
+            </div>
+        </div>
+    </div>      
+    
+    <div class="p-table-div"
+            [ngClass]="(displayRightBlock === true)?'col-xl-8':'col-xl-12'">
+        <p-table #tt [columns]="cols" [value]="hostelCustomers" [(selection)]="selectedHostelCustomers"
+                    [autoLayout]="true" [reorderableColumns]="true" sortMode="multiple" [paginator]="paginateCustomers" [rows]="rowsPerPage"
+                    dataKey="vin">
+            <ng-template pTemplate="caption">
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr class="p-table-buttons-tr">
+                    <td colspan="30">
+                        <div class="row">
+                            <div [ngClass]="(displayRightBlock === true)?'col-xl-12':'col-xl-6 col-lg-12'">
+                                <div class="row search-inputs-group">
+                                    <div class="col-md-6">
+                                        <input type="text" pInputText class="searchinput" (input)="tt.filterGlobal($event.target.value, 'contains')"
+                                                title="Search customer name, customer no, location, range, owner, reg.no, phone, brand, model etc" placeholder="Search hostel customers">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="searchinput2" value="vehicle:none hostel:winter">
+                                        <i class="material-icons advanced-search-dropdown" (click)="toggleAdvFiltersBlockVisibility()">keyboard_arrow_{{displayAdvFilters ? 'up' : 'down'}}</i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-table-buttons-div"
+                                    [ngClass]="(displayRightBlock === true)?'col-xl-12':'col-xl-6 col-lg-12'">
+                                <hostelCustomersButtons
+                                        (toogleRightBlockEvent)="toogleRightBlockEvent($event)" 
+                                        (togglePaginateCustomersDataEvent)="togglePaginateCustomersData()"
+                                        (toogleDisplayColumnsFiltersRowEvent)="toogleDisplayColumnsFiltersRow()"
+                                        [displayFilters]="displayFilters"
+                                        [displaySchedule]="displaySchedule"
+                                        [displaySendEmail]="displaySendEmail"
+                                        [displaySendSms]="displaySendSms"
+                                        [paginateCustomers]="paginateCustomers">                                        
+                                </hostelCustomersButtons>                                    
+                                <div class="p-table-columns-filter">
+                                    <p-multiSelect [options]="columnOptions" [(ngModel)]="cols"></p-multiSelect>
+                                </div>
+                            </div>                                
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="displayAdvFilters === true" class="grey-f8-background-color-class">
+                    <td colspan="30">                            
+                            <hostelCustomersSearch></hostelCustomersSearch>                             
+                    </td>                        
+                </tr>
+                <tr class="p-table-columns-titles-tr">
+                    <th class="width-em-2_25">
+                        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field" pReorderableColumn>
+                        {{col.header}}
+                    </th>
+                    <th *ngIf="displaySchedule === true" class="width-em-2_25">
+                        Hide
+                    </th>
+                </tr>
+                <tr *ngIf="displayFilters === true" class="p-table-columns-filter-row">
+                    <th></th>
+                    <th *ngFor="let col of columns">
+                        <input pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                    <td>
+                        <p-tableCheckbox [id]="rowData.vin" [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns" [ngSwitch]="col.field">
+                        <a *ngSwitchCase="'regNo'">{{rowData[col.field]}}</a>
+                        <span *ngSwitchDefault>{{rowData[col.field]}}</span>
+                    </td>
+                    <td *ngIf="displaySchedule === true">
+                        <i class="material-icons">remove_circle_outline</i>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>  
+    <div class="col-xl-4 sidebar-col-reg">
+        <hostelCustomersSchedule
+            *ngIf="displaySchedule === true"
+            (closeScheduleBlockEvent)="toogleRightBlockEvent($event)"
+        ></hostelCustomersSchedule>
+        <hostelCustomersEmail 
+            *ngIf="displaySendEmail === true"
+            (closeSendEmailBlockEvent)="toogleRightBlockEvent($event)"
+        ></hostelCustomersEmail>
+        <hostelCustomersSms 
+            *ngIf="displaySendSms === true"
+            (closeSendSmsBlockEvent)="toogleRightBlockEvent($event)"
+        ></hostelCustomersSms>
+    </div>
+</div>        

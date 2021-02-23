@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{dialogData.title}}</h2>
+<mat-dialog-content>
+  <div>{{dialogData.txt}</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="dialog-footer">
+    <button mat-raised-button
+    (click)="onCanselClick()"
+      *ngIf="dialogData.isCancelBtn">{{dialogData.cancelBtnTxt}}</button>
+    <button mat-raised-button
+      (click)="submit()">{{dialogData.okBtnTxt}}</button>
+  </div>
+</mat-dialog-actions>

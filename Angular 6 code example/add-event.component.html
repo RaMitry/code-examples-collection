@@ -1,0 +1,134 @@
+<div class="standard-view-element">
+  <div class="dashboard-theme">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="disposal-header">
+      <div class="select-location" fxLayout="row" fxLayoutAlign="start center">
+        <p class="page-title">Add Event</p>
+      </div>
+      <div>
+        <button class="close-view" id="add_event_close" (click)="cancel()">X</button>
+      </div>
+    </div>
+
+    <div class="disposal-content">
+
+      <div fxLayoutAlign="center">
+
+        <mat-card fxFlex.gt-sm="100%" fxFlex.sm="100%">
+          <mat-card-subtitle>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="bold-italic">
+                Disposal #{{ activeDisposal?.id }}
+              </div>
+              <div class="bold-italic">
+                Created {{ activeDisposal?.createdDate | date:'shortDate' }}
+              </div>
+            </div>
+          </mat-card-subtitle>
+          <mat-card-subtitle>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <div class="event-disposal-title">
+                {{ disposalCustomerLocation?.location }}({{ activeDisposal?.title}})
+              </div>
+            </div>
+          </mat-card-subtitle>
+        </mat-card>
+      </div>
+
+      <form (ngSubmit)="onAddEvent(addEventForm)" #addEventForm="ngForm" fxLayout="column" >
+        
+        <div class="add-event-assign-me" fxLayout="row"  fxLayoutAlign="end">
+          <button class="add-event-buttons" mat-raised-button color="primary" (click)="cancel()" routerLinkActive="active">
+            Cancel
+          </button>
+          <button class="add-event-buttons" type="submit" mat-raised-button color="primary" [disabled]="!addEventForm.valid">
+            Save Event
+          </button>
+        </div>
+
+        <div fxFlex.gt-sm="100%" fxFlex.sm="100%">
+
+          <div class="add-event-from-block">
+            <mat-card>
+              <mat-card-subtitle>
+                Event Type <span class="required-symbol">*</span>
+              </mat-card-subtitle>
+              <mat-card-content>
+                <mat-button-toggle-group class="event-type-button-group" fxLayoutGap="10px" fxLayout.gt-sm="row wrap" fxLayout.lt-md="column"
+                  [(ngModel)]="eventTypeId" name="type" id="type" required color="primary">
+
+                  <mat-button-toggle class="event-type-button" color="primary" *ngFor="let type of eventTypes" [value]="type.val" name="type.val">
+                    <span [ngSwitch]="type.val">
+                      <i class="fa fa-bars fa-lg icon-event-type" *ngSwitchCase="1"></i>
+                      <i class="fa fa-cubes fa-lg" *ngSwitchCase="2"></i>
+                      <i class="fa fa-truck fa-lg" *ngSwitchCase="3"></i>
+                      <i class="fa fa-flash fa-lg" *ngSwitchCase="4"></i>
+                      <i class="fa fa-cogs fa-lg" *ngSwitchCase="5"></i>
+                    </span>
+                    {{ type.description }}
+                  </mat-button-toggle>
+
+                </mat-button-toggle-group>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="add-event-from-block">
+            <mat-card>
+              <mat-card-subtitle>
+                Event Date <span class="required-symbol">*</span>
+              </mat-card-subtitle>
+              <mat-card-content>
+                <div fxLayoutGap="20px" fxLayout.gt-sm="row wrap" fxLayout.lt-md="column">
+
+                  <mat-form-field color="primary">
+                    <mat-label>Select Date</mat-label>
+                    <input matInput [matDatepicker]="actStart" [(ngModel)]="selectedDate" name="date" id="date" required>
+                    <mat-datepicker-toggle matSuffix [for]="actStart"></mat-datepicker-toggle>
+                    <mat-datepicker #actStart></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field class="time-input" color="primary">
+                    <input matInput [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" [(ngModel)]="selectedTime" name="time" id="time" placeholder="Select Time"
+                      required>
+                    <owl-date-time #dt1 pickerType="timer" hour12Timer="true"></owl-date-time>
+                  </mat-form-field>
+
+                  <mat-form-field color="primary">
+                    <input matInput ngModel name="reportsTo" id="reportsTo" placeholder="Report to">
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="add-event-assign-me">
+              <mat-checkbox color="primary" ngModel name="isTentative" id="isTentative">Tentative</mat-checkbox>
+            </div>
+
+          <div class="add-event-from-block">
+            <mat-card>
+              <mat-card-subtitle>
+                Notes
+              </mat-card-subtitle>
+              <mat-card-content>
+                <mat-form-field class="event-notes-formfiled">
+                  <textarea class="event-notes-textarea" placeholder="Notes about the event." matInput matTextareaAutosize="true" matAutosizeMinRows="2"
+                    ngModel name="notes" id="notes"></textarea>
+                </mat-form-field>
+                <add-event-notes-journal [(notes)]=eventNotes></add-event-notes-journal>
+              </mat-card-content>
+            </mat-card>
+          </div>
+
+          <div class="add-event-assign-me">
+            <mat-checkbox color="primary" ngModel name="assigned" id="assigned">Assign me to this event.</mat-checkbox>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>

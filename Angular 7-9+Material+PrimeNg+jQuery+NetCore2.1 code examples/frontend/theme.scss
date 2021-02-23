@@ -1,0 +1,90 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$usr-app-primary: mat-palette($mat-deep-purple);
+$usr-app-accent: mat-palette($mat-purple, 'A400', 'A700');
+$usr-app-warn: mat-palette($mat-pink);
+$usr-app-theme: mat-light-theme($usr-app-primary, $usr-app-accent, $usr-app-warn);
+.usr-app-theme { @include angular-material-theme($usr-app-theme); }
+
+.usr-app-theme {
+  .mat-button {
+    background-color: mat-color($mat-deep-purple, 100);
+  }
+  .ui-dialog-titlebar {
+    background-color: mat-color($mat-deep-purple, 300);
+    color: white;
+  }
+  .ui-dialog {
+    border: 1px solid mat-color($mat-deep-purple, 400) !important;
+  }
+  .ui-button {
+    &:active {
+      background-color: mat-color($mat-deep-purple, 700);
+    }    
+  }
+}
+
+$schedule-primary: mat-palette($mat-indigo);
+$schedule-accent: mat-palette($mat-orange, 100, 200, 300);
+$schedule-warn: mat-palette($mat-red);
+$schedule-theme: mat-light-theme($schedule-primary, $schedule-accent, $schedule-warn);
+.schedule-theme { @include angular-material-theme($schedule-theme); }
+
+.schedule-theme {
+  .mat-button {
+    background-color: mat-color($mat-deep-purple, 50);
+  }
+  .ui-dialog-titlebar {
+    background-color: mat-color($mat-deep-purple, 100);
+  }
+  .ui-dialog {
+    border: 1px solid mat-color($mat-deep-purple, 200) !important;
+  }
+  button.lwd-window-titlebar-button {
+    border: 1px solid mat-color($mat-deep-purple, 300) !important;
+    >span.ui-button-icon {
+      color: mat-color($mat-deep-purple, 300) !important;
+    }
+  }
+}
+
+button[data-ariadescribedby="schedule_component"] {
+  border: 1px solid mat-color($mat-deep-purple, 200) !important;
+  background: mat-color($mat-deep-purple, 50) !important;
+  &:hover {
+    background: mat-color($mat-deep-purple, 100) !important;
+  }
+}
+
+$events-primary: mat-palette($mat-lime);
+$events-accent: mat-palette($mat-green, 700, 800, 900);
+$events-warn: mat-palette($mat-deep-orange);
+$events-theme: mat-light-theme($events-primary, $events-accent, $events-warn);
+.events-theme { @include angular-material-theme($events-theme); }
+
+.events-theme {
+  .mat-button {
+    background-color: mat-color($mat-lime, 100);
+  }
+  .ui-dialog-titlebar {
+    background-color: mat-color($mat-lime, 100);
+  }
+  .ui-dialog {
+    border: 1px solid mat-color($mat-lime, 200) !important;
+  }
+  button.lwd-window-titlebar-button {
+    border: 1px solid mat-color($mat-lime, 300) !important;
+    >span.ui-button-icon {
+      color: mat-color($mat-lime, 300) !important;
+    }
+  }
+}
+
+button[data-ariadescribedby="events_component"] {
+  border: 1px solid mat-color($mat-lime, 200) !important;
+  background: mat-color($mat-lime, 50) !important;
+  &:hover {
+    background: mat-color($mat-lime, 100) !important;
+  }
+}

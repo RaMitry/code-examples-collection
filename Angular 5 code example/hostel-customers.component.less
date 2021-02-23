@@ -1,0 +1,73 @@
+@import '../../../styles.less';
+@import '../../../assets/custom/p-table-grid-styles.less';
+
+.advanced-search-dropdown {
+  position: relative;
+  color: red;
+  cursor: pointer;
+  top: 5px;
+  line-height: 0.9 !important;
+}
+
+.add-hostel-customer-link {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.hostel-customers-wrapper {
+  padding-top: 20px;
+  
+  .sidebar-col-reg {
+    padding: 0 0 0 30px;
+  }
+}
+
+.block-header h2 {
+  text-transform: uppercase;
+}
+
+.p-table-div {
+  padding: 0 !important;
+  float: left;
+}
+
+.sidebar-col-reg {
+  float: left;
+  
+  .card {
+    margin-top: 0;
+  }
+}
+
+@media (max-width:1404px){
+  
+  .info-text {
+    font-size: 12px !important;
+  }
+
+  .add-hostel-customer-link {
+    font-size: 15px !important;
+  }
+  
+  .p-table-buttons-tr {
+    >td>.row {
+      div.col-xl-6 {
+        -webkit-box-flex: 0 !important;
+        -ms-flex: 0 0 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      .p-table-buttons-div.col-xl-6 {
+        -webkit-box-flex: 0 !important;
+        -ms-flex: 0 0 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+    }
+  }
+  
+  
+}

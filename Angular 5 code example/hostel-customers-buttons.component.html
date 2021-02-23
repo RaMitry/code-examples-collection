@@ -1,0 +1,83 @@
+<div class="btns-row-block">
+    <div class="btns-col-block">
+
+        <div class="switch buttonsRow display-inline">
+            <label>
+                <strong title="List all on one page" class="border-bottom-1dotted-blue_main">{{l("ViewAll")}}</strong>
+                <input type="checkbox" [(ngModel)]="displayAllCustomers" (change)="togglePaginateCustomersData()">
+                <span class="lever bg-grey"></span>
+            </label>
+        </div>
+
+        <a href="javascript:;" (click)="toogleDisplayScheduleBlock()"
+           data-toggle="tooltip" data-placement="top" class="btn waves-effect buttonsRow"
+           [ngClass]="displaySchedule === true ? ['dark-cyan-background-color-class', 'white-color-class'] : ['white-background-color-class', 'blue-main-color-class']">
+            <i class="material-icons">playlist_add</i>
+            <span>{{l("Schedule")}}</span>
+        </a>
+
+
+        <div class="btn-group buttonsRow">
+            <a href="javascript:;" class="btn waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <i class="material-icons">menu</i>
+                <span>{{l("More")}}</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:;" (click)="toogleDisplayEmailBlock()" data-toggle="tooltip" data-placement="top" 
+                       class="btn waves-effect"
+                       [ngStyle]="displaySendEmail && {'background-color':'rgb(0, 150, 136)'}">
+                        <i class="material-icons" [ngStyle]="displaySendEmail && {'color':'rgb(255, 255, 255)'}">email</i>
+                        <span [ngStyle]="displaySendEmail && {'color':'#fff'}">{{l("Email")}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="tooltip" (click)="toogleDisplaySmsBlock()" data-placement="top" 
+                       href="javascript:;" class="btn waves-effect"
+                       [ngStyle]="displaySendSms && {'background-color':'rgb(0, 150, 136)'}">
+                        <i class="material-icons" [ngStyle]="displaySendSms && {'color':'rgb(255, 255, 255)'}">phone</i>
+                        <span [ngStyle]="displaySendSms && {'color':'#fff'}">{{l("SMS")}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="btn waves-effect text-align-left">
+                        <i class="material-icons">playlist_add</i>
+                        <span>{{l("SeasonalInvoicing")}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="btn-group buttonsRow">
+            <a href="javascript:;" class="btn waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <i class="material-icons">view_list</i>
+                <span>{{l("Report")}}</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:;" class="btn waves-effect text-align-left" (click)="exportAllTableDataToCSV()">
+                        <span class="text-uppercase">{{l("ExportTableToCsv")}}</span>
+                    </a>
+                </li>
+                <li><a href="#" class="btn waves-effect text-align-left">
+                        <span class="text-uppercase">{{l("PrintList")}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="btn waves-effect text-align-left">
+                        <span class="text-uppercase">{{l("ShortInfoVertical")}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <a href="javascript:;" (click)="toogleDisplayColumnsFiltersRow()"
+           [ngStyle]="{'background-color':displayFilters === true ? 'rgb(0, 150, 136)' : 'rgb(255, 255, 255)' }" class="btn waves-effect buttonsRow">
+            <i class="material-icons toogle-filters-icon"
+               [ngClass]="displayFilters === true ? 'white-color-class' : 'blue-main-color-class'">filter_list</i>
+        </a>
+
+    </div>
+</div>

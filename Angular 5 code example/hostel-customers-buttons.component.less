@@ -1,0 +1,72 @@
+@import '../../../styles.less';
+
+.btns-row-block {
+  display: inline-block;
+  
+  .btns-col-block  {
+
+    .buttonsRow {
+      margin-bottom: 12px;
+    }
+    
+    >.btn, >.btn-group {
+      margin-right: 5px;
+    }
+    
+    .toogle-filters-icon:hover {
+      color: #333 !important;
+    }
+    
+    a.btn {
+      padding: 0.65rem 0.8rem !important;
+      span {
+        text-transform: none !important;
+        font-size: 13px !important;        
+      }
+    }
+    
+    span.lever {
+      margin: 0 10px !important;
+    }
+    
+    .btn:not(.btn-link):not(.btn-circle) {
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    }
+    .btn:hover,
+    .btn.focus {
+      color: #333;
+      background-color: #fff;
+    }
+    .dropdown-menu>li>a.btn {
+      box-shadow: none !important;
+      color: #333 !important;
+      font-size: 13px;
+      text-align: left;
+      padding: 0.2rem 1.2rem;
+      height: 2.1rem;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -ms-border-radius: 0;
+      border-radius: 0;
+      
+      i.material-icons {
+        color: #333;
+      }
+      
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+
+    .switch label { 
+      font-size: 13px;
+      color: #555;
+      
+      .lever {
+        width: 40px;
+        height: 15px;
+        background-color: #818181;
+      }
+    }    
+  }
+}

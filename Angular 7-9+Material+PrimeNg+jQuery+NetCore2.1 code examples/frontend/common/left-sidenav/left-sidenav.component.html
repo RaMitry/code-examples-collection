@@ -1,0 +1,49 @@
+<mat-nav-list>
+  <div *ngIf="sidenavIconMode">
+    <a mat-list-item routerLink="/" matTooltip="Dashboard">
+      <mat-icon>account_balance</mat-icon>
+    </a>
+    <a mat-list-item (click)="togglePlanAssign()" matTooltip="Assign Plan to Users">
+      <mat-icon>event</mat-icon>
+    </a>
+    <a mat-list-item (click)="toggleEventsPortal()" matTooltip="Events">
+      <mat-icon>alarm_add</mat-icon>
+    </a>
+    <a mat-list-item  (click)="logout()" matTooltip="Logout">
+      <mat-icon>exit_to_app</mat-icon>
+   </a>
+    <div class="arrow-icon-div" fxLayout="row" fxLayoutAlign="end center">
+      <span class="arrow-icon-span" (click)="toggleSidenavMode()" matTooltip="Expand">
+        <i class="fa fa-arrow-circle-right fa-lg"></i>
+      </span>
+    </div>
+  </div>
+  <div *ngIf="!sidenavIconMode" fxLayout="column" fxFlexFill fxLayoutAlign="space-between">
+    <div id="tophalf">     
+      <a mat-list-item routerLink="/" matTooltip="Dashboard" (click)="openDashboard()">
+        <mat-icon>account_balance</mat-icon>
+        <span class="nav-caption">Dashboard</span>
+      </a>
+      <a mat-list-item (click)="togglePlanAssign()" matTooltip="Assign Plan to Users">
+        <mat-icon>event</mat-icon>
+        <span class="nav-caption">Assign Plan to Users</span>
+      </a>
+      <a mat-list-item (click)="openEvents()" matTooltip="Events">
+        <mat-icon>alarm_add</mat-icon>
+        <span class="nav-caption">Events</span>
+      </a>
+      <a mat-list-item (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span class="nav-caption">Logout</span>
+     </a>
+      <div class="arrow-icon-div" fxLayout="row" fxLayoutAlign="end center">
+        <span class="arrow-icon-span" (click)="toggleSidenavMode()" matTooltip="Shrink">
+          <i class="fa fa-arrow-circle-left fa-lg"></i>
+        </span>
+      </div>
+    </div>
+    <div id="bottomhalf" fxLayout="column" fxLayoutAlign="end">
+        Our company
+    </div>
+  </div>
+</mat-nav-list>

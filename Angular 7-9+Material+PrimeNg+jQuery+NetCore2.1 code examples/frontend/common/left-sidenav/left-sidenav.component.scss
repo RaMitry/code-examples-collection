@@ -1,0 +1,48 @@
+@import "~@angular/material/theming";
+
+.mat-nav-list {
+  // height: 100%;
+  display: flex;
+  flex-direction: column;
+}  
+
+.mat-nav-list > * {
+  flex-shrink: 0;
+}
+  
+a {
+  text-decoration: none;
+  color: white;
+}  
+
+a:hover,
+a:active {
+  color: lightgray;
+}
+
+.nav-caption {
+  margin-left: 10px;
+  width: 122px !important;
+  line-height: 1.4 !important;
+}  
+    
+.mat-sidenav-empty-space {
+  flex-grow: 1
+}
+
+.arrow-icon-span {
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 5px;
+  color: grey;
+}  
+
+.mat-icon {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 32px !important;
+} 
+
+::ng-deep.mat-list-item-content {
+  padding: 0 14px !important
+}

@@ -1,0 +1,91 @@
+<div id="reply_dialog" style="display: none;">
+	<div id="reply_dialog_content">
+		<div class="active" id="reply_content" ng-show="warp_right.nav_tabs.showReplyTab == warp_right.replyControl.tabShow">
+			<div style="margin-top: 10px;"> </div>
+			<div class="alert" ng-if="!warp_right.profileObject.profileName">
+				<span>
+					<button type="button" class="close">&times;</button>
+					<strong>Warning: </strong>
+					reply profiles are not specified for this source. Please use Account Settings | Profiles to specify according profiles.
+				</span>
+			</div>
+			<div class="alert" ng-if="warp_right.replyControl.showAlertData.data && warp_right.replyControl.showAlertData.data.has_answ != 'undefined' && warp_right.replyControl.showAlertData.data.has_answ != 0 && warp_right.currentMessage.current_message.data.status != 4">
+				<span>
+					<button type="button" class="close" ng-click="warp_right.replyControl.showAlertData.data = false">&times;</button>
+					<strong>Warning!</strong>
+					Agent
+					<b>{{ warp_right.replyControl.showAlertData.data.user_name }}</b>
+					already provided comment(s) to this message. Please select the Closed tab, locate the ticket and add additional comments, if necessary.
+				</span>
+			</div>			
+			<img ng-if="warp_right.loader.showLoaderSmall" class="loader_small" src="../../images/loader_color.gif" />
+			<div class="merge" ng-if="warp_right.replyControl.mergeCheckbox">
+				<my-dir ng-if="value.path == warp_right.replyControl.merge_with.merge_with_name"
+				ng-repeat="(key, value) in warp_right.messages['merge'].data.msgs_in_json track by $index"
+				ng-include src="'msgs_simple'" ng-init="warp_right.checkChild = value;" ng-switch="warp_right.checkChild.child ? 'yes' : 'nope'"></my-dir>
+			</div>
+			<div class="reply_to stream_msg" ng-class="{'child': warp_right.replyControl.mergeCheckbox}"></div>
+			<div class="status_mark" ng-if="warp_right.replyControl.showStatusMark">
+				<input type="checkbox" name="closed" ng-model="warp_right.replyControl.closedCheckbox" ng-change="warp_right.replyControl.changeMerge_ClosedOpt()">
+				<label>Mark as Closed</label>
+			</div>
+			<div style="clear: both; float: none;"></div>
+			<div class="categories">
+				<label>Categories:</label>
+				<input size="1" type="text" placeholder=""/>
+			</div>
+			<div class="sentiment">
+				<label>Sentiment:</label>
+				<input type="text" />
+				<button ng-click="warp_right.markingCats(warp_right.currentMessage.current_message.data, true)" class="btn save">Save</button>
+			</div>
+			<div style="clear: both; float: none;"></div>
+			<div class="profile">
+				<label>Profile:</label>
+				<a class="go_to_set_profile" target="_self" ng-if="!warp_right.profileObject.profileName"></a>
+			</div>
+
+			<div class="template">
+				<label>Template:</label>
+				<select name="template" ng-model="warp_right.templateObject.templateName" ng-options=" value.template_id as value.template_name for (name, value) in warp_right.templateObject.templates" ng-change="warp_right.changeTemplate(warp_right.templateObject.templateName)">
+					<option value="">Select Template</option>
+				</select>
+			</div>
+			<div style="clear: both; float: none;"></div>
+			<div class="captcha" ng-show="warp_right.captcha.reply_captcha.captcha_sid">
+				<label>
+					<img src="{{warp_right.captcha.reply_captcha.captcha_img}}" />
+					<input type="text" name="captcha_key" ng-model="warp_right.captcha.reply_captcha.captcha_key"/>
+				</label>
+			</div>
+
+			<div id="upload_files_box" ng-show="!(warp_right.replyControl.profileDisabled || warp_right.currentMessage.current_message.data.source != 'vk.com' || warp_right.currentMessage.current_message.data.inbox_profile.indexOf('club') >= 0)">
+				<form>
+					<input class="" id="file_upload" style="display: none;" type="file" onchange='get_upload_files(this)'>
+					<button class="btn">Add Attachment</button>
+				</form>
+				<div id="file_upload_data"></div>
+			</div>
+
+			<div style="clear: both; float: none;"></div>
+
+
+			<div class="reply_input" class="loader_big">
+				<div class="like_box" ng-show="warp_right.replyControl.like_show">
+					<input type="checkbox" name="like_object" ng-model="warp_right.replyControl.like_check"/>
+					<label>Like original message</label>
+					<span style="float: left;" ng-show="warp_right.replyControl.like_show" class="cp_help like_help pull-right ui-icon ui-icon-help"></span>
+				</div>
+				
+				<div style="clear: both; float: none;"></div>
+
+				<div class="alert alert-error" style=" width: 380px;" ng-if="warp_right.error.show">
+					<button type="button" class="close" ng-click="warp_right.error.show = false;">&times;</button>
+					<div ng-bind-html="warp_right.error.data | to_trust"></div>
+				</div>
+				<textarea ng-hide='warp_right.loader.showLoader && !warp_right.replyControl.showTextarea' style="font-family:'Calibri';width: 100%; min-height: 100px;" ng-model="warp_right.currentMessage.text" autofocus  ng-keyup="warp_right.countTextareaCharacters()">{{warp_right.currentMessage.text}}</textarea>
+				<span class="counter" ng-if='warp_right.SymbolCounter.enabled()'> Symbols qty: <b ng-class="{'red': warp_right.currentMessage.text_length > warp_right.SymbolCounter.red()}">{{warp_right.currentMessage.text_length}}</b> [{{warp_right.SymbolCounter.max()}} - max]</span>
+			</div>
+		</div>
+	</div>
+</div>
